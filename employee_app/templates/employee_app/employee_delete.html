@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {% endblock %}
+
+{% block content %}
+<p><a href="{% url 'employee_app:employee_list'%} ">Back to the Task List</a></p>
+<form action="" method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit">Submit</button>
+</form>
+  
+{% endblock  %}
