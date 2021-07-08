@@ -1,9 +1,16 @@
+from django.db.models import Count
 from django.shortcuts import render, reverse
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
-from .models import Task
+from .models import Task , Category
 from .forms import TaskModelForm, EmployeeAssignForm
 from employee_app.mixins import LoginAndEmployeeRequiredMixin
+
+
+def get_category_count():
+  queryset = Task.objects.values('category__name').annotate(Count("category__name"))
+  return queryset
+
 
 
 class LandingPageView(generic.TemplateView):
@@ -125,3 +132,48 @@ class AssignEmployee(generic.FormView):
     return reverse('task_app:task_list')
 
 
+class TaskCategoryView(LoginRequiredMixin,generic.ListView):
+  template_name = 'task_app/task_category.html'
+  context_object_name = 'categories'
+
+  def get_queryset(self):
+    user = self.request.user
+    organisation = user.userprofile
+    if user.is_employer:
+      queryset = Category.objects.filter(organisation=organisation)
+    else:
+      queryset = Category.objects.filter(
+          organisation=user.employee.organisation)
+    return queryset
+
+  def get_context_data(self, **kwargs):
+    context = super(TaskCategoryView, self).get_context_data(**kwargs)
+    user = self.request.user
+    if user.is_employer:
+      queryset = Task.objects.filter(
+          organisation=user.userprofile, employee__isnull=True)
+    else:
+      queryset = Task.objects.filter(
+          organisation=user.employee.organisation, employee__isnull=True)
+      queryset = queryset.filter(employee__user=user, employee__isnull=True)
+    count_category = Task.objects.filter(category__isnull=True).count()
+    get_count = get_category_count
+    context.update({
+        "unassigned_category_count": count_category,
+        "get_category_count": get_count
+    })
+    return context
+
+
+class TaskCategoryDetail(generic.DetailView):
+  template_name = 'task_app/task_category_detail.html'
+  context_object_name = 'category'
+
+  def get_queryset(self):
+    user = self.request.user
+    organisation = user.userprofile
+    if user.is_employer:
+      queryset = Category.objects.filter(organisation=organisation)
+    else:
+      queryset = Category.objects.filter(organisation=user.employee.organisation)
+    return queryset

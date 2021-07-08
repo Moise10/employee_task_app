@@ -26,7 +26,7 @@ class Task(models.Model):
   description = models.TextField(max_length=300)
   employee = models.ForeignKey("Employee", null=True, blank=True, on_delete=models.SET_NULL)
   created_at = models.DateTimeField(auto_now_add=True)
-  category = models.ForeignKey("Category", on_delete=models.CASCADE)
+  category = models.ForeignKey("Category", related_name="Task", on_delete=models.CASCADE)
   organisation = models.ForeignKey("UserProfile", on_delete=models.CASCADE)
   
 
