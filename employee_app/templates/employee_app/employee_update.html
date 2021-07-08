@@ -12,7 +12,7 @@
         <h2 class="text-sm title-font text-gray-500 tracking-widest" style="user-select: auto;">Employee</h2>
         <h1 class="text-gray-900 text-3xl title-font font-medium mb-4" style="user-select: auto;">{{task.title}}</h1>
         <div class="flex mb-4" style="user-select: auto;">
-          <a href="{% url 'employee_app:task_detail' employee.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1" style="user-select: auto;">Description</a>
+          <a href="{% url 'employee_app:employee_detail' employee.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1" style="user-select: auto;">Description</a>
           <a href="#"  class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1" style="user-select: auto;">Category</a>
           <a href="{% url 'employee_app:employee_update' employee.pk %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1" style="user-select: auto;">Update</a>
         </div>

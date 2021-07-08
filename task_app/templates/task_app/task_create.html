@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
-
+{% load tailwind_filters %}
 
 {% block title %} {% endblock %}
 
 {% block content %}
-<form action="" method="post">
-  {% csrf_token %}
-  {{form.as_p}}
-  <button type="submit">Submit</button>
-</form>
+<div class="mx-auto">
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
   
 {% endblock  %}

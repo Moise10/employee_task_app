@@ -6,4 +6,5 @@ User = get_user_model()
 class EmployeeModelForm(forms.ModelForm):
   class Meta:
     model = User
-    fields = ('first_name', 'last_name', 'email', 'username',)
+    fields = ('first_name', 'last_name', 'email',
+              'username', 'description', 'phone_number')

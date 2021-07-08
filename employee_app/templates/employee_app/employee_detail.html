@@ -15,10 +15,14 @@
           <a href="#" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1" style="user-select: auto;">Category</a>
           <a href="{% url 'employee_app:employee_update' employee.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1" style="user-select: auto;">Update</a>
         </div>
-        <p class="leading-relaxed mb-4" style="user-select: auto;"></p>
+        <p class="leading-relaxed mb-4" style="user-select: auto;">{{employee.user.description}}</p>
         <div class="flex border-t border-gray-200 py-2" style="user-select: auto;">
-          <span class="text-gray-500" style="user-select: auto;">employee_age</span>
-          <span class="ml-auto text-gray-900" style="user-select: auto;"></span>
+          <span class="text-gray-500" style="user-select: auto;">Age</span>
+          <span class="ml-auto text-gray-900" style="user-select: auto;">{{employee.user.age}}</span>
+        </div>
+        <div class="flex border-t border-gray-200 py-2" style="user-select: auto;">
+          <span class="text-gray-500" style="user-select: auto;">Email</span>
+          <span class="ml-auto text-gray-900" style="user-select: auto;">{{employee.user.email}}</span>
         </div>
         <div class="flex border-t border-gray-200 py-2" style="user-select: auto;">
           <span class="text-gray-500" style="user-select: auto;">Category</span>
@@ -26,7 +30,7 @@
         </div>
         <div class="flex border-t border-b mb-6 border-gray-200 py-2" style="user-select: auto;">
           <span class="text-gray-500" style="user-select: auto;">Phone_number</span>
-          <span class="ml-auto text-gray-900" style="user-select: auto;"></span>
+          <span class="ml-auto text-gray-900" style="user-select: auto;">{{employee.user.phone_number}}</span>
         </div>
         <div class="flex" style="user-select: auto;">
           <a href="{% url 'employee_app:employee_delete' employee.pk %}"class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" style="user-select: auto;">Delete</a>
